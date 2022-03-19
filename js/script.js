@@ -1,4 +1,5 @@
-let taskObjects = []
+const localStorageTasks = JSON.parse(localStorage.getItem('localStorageTasks'))
+let taskObjects = localStorage.getItem('localStorageTasks') !== null ? localStorageTasks : []
 
 const btnAdd = document.querySelector('.btn-add')
 
@@ -17,6 +18,7 @@ btnAdd.onclick = () => {
   inpName.value = ""
 
   init()
+  updateLocalStorage()
 }
 
 const generateID = () =>{
@@ -30,6 +32,11 @@ const removeTask = taskID =>{
   taskObjects = taskObjects.filter(task => taskID != task.id)
 
   init()
+  updateLocalStorage()
+}
+
+const updateLocalStorage = () => {
+  localStorage.setItem('localStorageTasks', JSON.stringify(taskObjects))
 }
 
 const init = () => {
