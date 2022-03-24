@@ -4,6 +4,7 @@ let taskObjects = localStorage.getItem('localStorageTasks') !== null ? localStor
 const btnAdd = document.querySelector('.btn-add')
 
 btnAdd.onclick = () => {
+  // Cria uma nova task e adiciona a mesma no array em que estão as outras tarefas e atualiza o localsotrage e a tela
   const inpName = document.querySelector('.inp-new-item')
 
   if (inpName.value.trim() != ""){
@@ -22,6 +23,7 @@ btnAdd.onclick = () => {
 }
 
 const generateID = () =>{
+  // Gera um id necessário para cada task nova
   const IDHead = Date.now().toString(36)
   const IDTail = Math.random().toString(36).substring(2)
 
@@ -29,6 +31,7 @@ const generateID = () =>{
 }
 
 const removeTask = taskID =>{
+  // Remove a task do array taskObjects
   taskObjects = taskObjects.filter(task => taskID != task.id)
 
   init()
@@ -36,10 +39,12 @@ const removeTask = taskID =>{
 }
 
 const updateLocalStorage = () => {
+  // Atualiza o local storage
   localStorage.setItem('localStorageTasks', JSON.stringify(taskObjects))
 }
 
 const init = () => {
+  // Sincroniza as tasks que aparecem na tela com as do local storage
   const ulTask = document.querySelector('ul.ul-tasks')
 
   ulTask.innerHTML = ""
